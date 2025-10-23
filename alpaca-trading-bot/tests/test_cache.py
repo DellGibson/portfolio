@@ -146,7 +146,7 @@ class TestMarketDataCache:
         assert quote is not None
         assert quote['bid'] == 140.00
         assert quote['ask'] == 140.20
-        assert quote['spread'] == 0.20
+        assert abs(quote['spread'] - 0.20) < 0.01  # Use approximate comparison for floats
         assert quote['bid_size'] == 1000
         assert quote['ask_size'] == 800
 

@@ -263,8 +263,13 @@ class MomentumBreakoutStrategy(BaseStrategy):
             default_signal['reason'] = f'Insufficient data (need {self.breakout_period} trades)'
             return default_signal
 
-        # Calculate period high and average volume
-        recent_trades = list(cache.trades[symbol])[-self.breakout_period:]
+        # Calculate period high and average volume from previous period (excluding current trade)
+        # This ensures we're comparing current price against PREVIOUS highs/lows
+        recent_trades = list(cache.trades[symbol])[-(self.breakout_period+1):-1]  # Exclude last trade
+        if len(recent_trades) < self.breakout_period:
+            default_signal['reason'] = f'Insufficient historical data'
+            return default_signal
+
         prices = np.array([t['price'] for t in recent_trades])
         volumes = np.array([t['size'] for t in recent_trades])
 
@@ -272,15 +277,15 @@ class MomentumBreakoutStrategy(BaseStrategy):
         period_low = np.min(prices)
         avg_volume = np.mean(volumes)
 
-        # Get recent volume (last 5 trades)
-        recent_volume = np.mean([t['size'] for t in list(cache.trades[symbol])[-5:]])
+        # Get current trade volume
+        current_volume = cache.trades[symbol][-1]['size']
 
         # Check for breakout above resistance
         breakout_level = period_high * (1 + self.breakout_threshold)
 
         if current_price >= breakout_level:
             # Potential breakout - verify with volume
-            if recent_volume >= avg_volume * self.volume_multiplier:
+            if current_volume >= avg_volume * self.volume_multiplier:
                 self._update_signal_time(symbol)
                 self.signals_generated += 1
 
@@ -290,18 +295,18 @@ class MomentumBreakoutStrategy(BaseStrategy):
                     'action': 'BUY',
                     'symbol': symbol,
                     'confidence': min(breakout_pct / 5.0, 1.0),  # Higher breakout = higher confidence
-                    'reason': f'Breakout: {breakout_pct:.1f}% above ${period_high:.2f} high, volume {recent_volume/avg_volume:.1f}x avg',
+                    'reason': f'Breakout: {breakout_pct:.1f}% above ${period_high:.2f} high, volume {current_volume/avg_volume:.1f}x avg',
                     'quantity': 0
                 }
             else:
-                default_signal['reason'] = f'Breakout without volume confirmation ({recent_volume/avg_volume:.1f}x < {self.volume_multiplier}x)'
+                default_signal['reason'] = f'Breakout without volume confirmation ({current_volume/avg_volume:.1f}x < {self.volume_multiplier}x)'
                 return default_signal
 
         # Check for breakdown below support
         breakdown_level = period_low * (1 - self.breakout_threshold)
 
         if current_price <= breakdown_level:
-            if recent_volume >= avg_volume * self.volume_multiplier:
+            if current_volume >= avg_volume * self.volume_multiplier:
                 self._update_signal_time(symbol)
                 self.signals_generated += 1
 
@@ -311,7 +316,7 @@ class MomentumBreakoutStrategy(BaseStrategy):
                     'action': 'SELL',
                     'symbol': symbol,
                     'confidence': min(breakdown_pct / 5.0, 1.0),
-                    'reason': f'Breakdown: {breakdown_pct:.1f}% below ${period_low:.2f} low, volume {recent_volume/avg_volume:.1f}x avg',
+                    'reason': f'Breakdown: {breakdown_pct:.1f}% below ${period_low:.2f} low, volume {current_volume/avg_volume:.1f}x avg',
                     'quantity': 0
                 }
 

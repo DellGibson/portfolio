@@ -45,3 +45,4 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+alpaca_trade_api.py

@@ -119,12 +119,18 @@ class TestOrderManager:
 
     def test_insufficient_buying_power(self, order_manager, mock_api):
         """Test 5: Reject order with insufficient buying power"""
-        # Account has $50k buying power
-        # Try to buy $60k worth
+        # Account has $50k buying power, $100k equity
+        # Try to buy $9k worth (within position size limit of 10% = $10k)
+        # But set buying power to only $5k
+        account = Mock()
+        account.equity = '100000.00'
+        account.buying_power = '5000.00'  # Less than order value
+        mock_api.get_account.return_value = account
+
         with pytest.raises(ValueError, match="Insufficient buying power"):
             order_manager.validate_order(
                 symbol='TSLA',
-                qty=600,  # 600 * $100 = $60,000
+                qty=90,  # 90 * $100 = $9,000 (within 10% limit but exceeds buying power)
                 side='buy',
                 price=100.00
             )
