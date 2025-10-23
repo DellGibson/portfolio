@@ -9,3 +9,7 @@ requests==2.31.0
 pytest==7.4.3
 pytest-cov==4.1.0
 pytest-asyncio==0.21.1
+openai==2.6.0
+flask==3.1.2
+schedule==1.2.2
+alpaca-py==0.43.0

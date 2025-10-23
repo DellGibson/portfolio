@@ -23,14 +23,54 @@ alpaca-trading-bot/
 ├── order_manager.py    # Order execution and risk management
 ├── strategy.py         # Trading strategy logic (mean reversion, momentum, hybrid)
 ├── main.py            # Main trading loop (async event-driven)
+├── trader_ai.py       # AI-driven trading bot with web UI (alternative to main.py)
 ├── utils.py           # Logging and alerting utilities
 ├── requirements.txt   # Dependencies
 ├── pytest.ini         # Test configuration
 └── tests/             # Unit tests (40+ tests)
     ├── test_cache.py
     ├── test_orders.py
-    └── test_strategy.py
+    ├── test_strategy.py
+    └── test_trader_ai.py
 ```
+
+## Two Trading Bot Options
+
+This repository includes **two different trading bots** you can choose from:
+
+### Option 1: Advanced Trading Bot (`main.py`)
+- **Complex**: Async event-driven architecture
+- **Multiple Strategies**: Mean reversion, momentum breakout, hybrid regime detection
+- **Real-time Data**: WebSocket streaming with millisecond-level updates
+- **Best For**: Experienced traders who want sophisticated strategy backtesting and optimization
+
+### Option 2: AI-Driven Trading Bot (`trader_ai.py`)
+- **Simple**: Schedule-based trading loop
+- **AI Decisions**: Uses OpenAI GPT-4o-mini for trading decisions
+- **Web UI**: Built-in Flask web interface to monitor bot status and logs
+- **Healthchecks**: Integrated Healthchecks.io monitoring
+- **Best For**: Beginners who want a simple, AI-powered trading bot with easy monitoring
+
+**Quick Start with AI Bot**:
+```bash
+# Set up environment variables in .env
+ALPACA_API_KEY_ID=your_key
+ALPACA_SECRET_KEY=your_secret
+OPENAI_API_KEY=your_openai_key
+HEALTHCHECKS_IO_URL=your_healthchecks_url
+
+# Run the AI trading bot
+python trader_ai.py
+
+# Access web UI at http://localhost:5000
+```
+
+The AI bot will:
+- Run trade checks every 15 minutes
+- Use GPT-4o-mini to make BUY/SELL/HOLD decisions
+- Display live status, logs, and account info in a web UI
+- Send health pings to Healthchecks.io
+- Allow manual trade triggers from the web interface
 
 ## Setup Instructions
 
@@ -59,19 +99,27 @@ cp .env.example .env
 nano .env
 ```
 
-Required configuration in `.env`:
+Required configuration in `.env` for **main.py**:
 ```
 ALPACA_API_KEY=your_key_here
 ALPACA_SECRET_KEY=your_secret_here
 ALPACA_BASE_URL=https://paper-api.alpaca.markets
 ```
 
-Optional configuration:
+Optional configuration for **main.py**:
 ```
 MAX_POSITION_PCT=0.10        # Max 10% of portfolio per position
 MAX_DAILY_LOSS_PCT=0.02      # Max 2% daily loss
 WATCHLIST=SPY,QQQ,AAPL,MSFT  # Symbols to trade
 DATA_FEED=iex                # 'iex' (free) or 'sip' (paid)
+```
+
+Required configuration in `.env` for **trader_ai.py**:
+```
+ALPACA_API_KEY_ID=your_key_here
+ALPACA_SECRET_KEY=your_secret_here
+OPENAI_API_KEY=your_openai_key_here
+HEALTHCHECKS_IO_URL=https://hc-ping.com/your-check-uuid
 ```
 
 ### 4. Run Tests
