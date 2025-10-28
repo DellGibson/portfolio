@@ -1,0 +1,76 @@
+2025-10-28 07:56:43,105 - INFO - Starting Alaska DoD Competitor Intelligence Scrape
+2025-10-28 07:56:43,105 - INFO - Target: Alaska
+2025-10-28 07:56:43,105 - INFO - Date: 2025-10-28T07:56:43.105009
+
+2025-10-28 07:56:43,105 - INFO - 
+============================================================
+2025-10-28 07:56:43,105 - INFO - Scraping Coast Guard
+2025-10-28 07:56:43,106 - INFO - ============================================================
+2025-10-28 07:56:50,190 - INFO - Scraping https://www.gocoastguard.com/active-duty-careers/enlisted-opportunities/view-job-descriptions...
+2025-10-28 07:56:50,396 - INFO - Starting Chromium download.
+2025-10-28 07:56:50,399 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec703f3cc90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:56:50,401 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b88a10>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:56:50,401 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8a3d0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:56:50,402 - INFO - Could not render JS for https://www.gocoastguard.com/active-duty-careers/enlisted-opportunities/view-job-descriptions: HTTPSConnectionPool(host='storage.googleapis.com', port=443): Max retries exceeded with url: /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8ae50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')). Using static HTML.
+2025-10-28 07:56:50,402 - ERROR - ✗ Failed to fetch https://www.gocoastguard.com/active-duty-careers/enlisted-opportunities/view-job-descriptions: Status 403
+2025-10-28 07:56:57,223 - INFO - Scraping https://www.gocoastguard.com/about-the-coast-guard/discover-our-roles-missions/alaska-region...
+2025-10-28 07:56:57,250 - INFO - Starting Chromium download.
+2025-10-28 07:56:57,251 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec7073786d0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:56:57,252 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b7ff10>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:56:57,253 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b89350>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:56:57,254 - INFO - Could not render JS for https://www.gocoastguard.com/about-the-coast-guard/discover-our-roles-missions/alaska-region: HTTPSConnectionPool(host='storage.googleapis.com', port=443): Max retries exceeded with url: /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8af90>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')). Using static HTML.
+2025-10-28 07:56:57,254 - ERROR - ✗ Failed to fetch https://www.gocoastguard.com/about-the-coast-guard/discover-our-roles-missions/alaska-region: Status 403
+2025-10-28 07:56:57,254 - INFO - ✓ Saved JSON output to alaska_competitor_data_partial.json
+2025-10-28 07:56:57,254 - INFO - 
+============================================================
+2025-10-28 07:56:57,255 - INFO - Scraping Air Force
+2025-10-28 07:56:57,255 - INFO - ============================================================
+2025-10-28 07:57:02,594 - INFO - Scraping https://www.airforce.com/find-a-recruiter...
+2025-10-28 07:57:02,694 - INFO - Starting Chromium download.
+2025-10-28 07:57:02,695 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec7043bd990>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:02,696 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b7ff10>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:02,697 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8a810>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:02,698 - INFO - Could not render JS for https://www.airforce.com/find-a-recruiter: HTTPSConnectionPool(host='storage.googleapis.com', port=443): Max retries exceeded with url: /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b88790>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')). Using static HTML.
+2025-10-28 07:57:02,698 - ERROR - ✗ Failed to fetch https://www.airforce.com/find-a-recruiter: Status 403
+2025-10-28 07:57:08,345 - INFO - Scraping https://www.jber.jb.mil/News/...
+2025-10-28 07:57:09,165 - INFO - Starting Chromium download.
+2025-10-28 07:57:09,166 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6db9947d0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:09,167 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b7cf10>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:09,168 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8a750>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:09,169 - INFO - Could not render JS for https://www.jber.jb.mil/News/: HTTPSConnectionPool(host='storage.googleapis.com', port=443): Max retries exceeded with url: /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8b750>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')). Using static HTML.
+2025-10-28 07:57:09,169 - ERROR - ✗ Failed to fetch https://www.jber.jb.mil/News/: Status 403
+2025-10-28 07:57:09,170 - INFO - ✓ Saved JSON output to alaska_competitor_data_partial.json
+2025-10-28 07:57:09,170 - INFO - 
+============================================================
+2025-10-28 07:57:09,170 - INFO - Scraping Navy
+2025-10-28 07:57:09,170 - INFO - ============================================================
+2025-10-28 07:57:13,684 - INFO - Scraping https://www.navy.com/local...
+2025-10-28 07:57:13,959 - INFO - Starting Chromium download.
+2025-10-28 07:57:13,960 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6da3c7990>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:13,961 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b7cd10>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:13,962 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b89950>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:13,963 - INFO - Could not render JS for https://www.navy.com/local: HTTPSConnectionPool(host='storage.googleapis.com', port=443): Max retries exceeded with url: /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8b310>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')). Using static HTML.
+2025-10-28 07:57:13,963 - ERROR - ✗ Failed to fetch https://www.navy.com/local: Status 403
+2025-10-28 07:57:13,963 - INFO - ✓ Saved JSON output to alaska_competitor_data_partial.json
+2025-10-28 07:57:13,963 - INFO - 
+============================================================
+2025-10-28 07:57:13,963 - INFO - Scraping Marines
+2025-10-28 07:57:13,963 - INFO - ============================================================
+2025-10-28 07:57:17,336 - INFO - Scraping https://www.marines.com/contact-a-recruiter...
+2025-10-28 07:57:17,505 - INFO - Starting Chromium download.
+2025-10-28 07:57:17,507 - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b7d290>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:17,507 - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8ae50>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:17,508 - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9b8a310>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip
+2025-10-28 07:57:17,509 - INFO - Could not render JS for https://www.marines.com/contact-a-recruiter: HTTPSConnectionPool(host='storage.googleapis.com', port=443): Max retries exceeded with url: /chromium-browser-snapshots/Linux_x64/1181205/chrome-linux.zip (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ec6d9bac510>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')). Using static HTML.
+2025-10-28 07:57:17,509 - ERROR - ✗ Failed to fetch https://www.marines.com/contact-a-recruiter: Status 403
+2025-10-28 07:57:17,510 - INFO - ✓ Saved JSON output to alaska_competitor_data_partial.json
+2025-10-28 07:57:17,510 - INFO - 
+============================================================
+2025-10-28 07:57:17,510 - INFO - Scraping Complete!
+2025-10-28 07:57:17,510 - INFO - Total pages attempted: 6
+2025-10-28 07:57:17,510 - INFO - Successful: 0
+2025-10-28 07:57:17,510 - INFO - Failed: 6
+2025-10-28 07:57:17,510 - INFO - ============================================================
+
+2025-10-28 07:57:17,510 - INFO - ✓ Saved JSON output to alaska_competitor_data.json
+2025-10-28 07:57:17,511 - INFO - ✓ Saved markdown summary to alaska_intel_summary.md

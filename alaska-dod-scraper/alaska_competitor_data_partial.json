@@ -1,0 +1,37 @@
+{
+  "scrape_metadata": {
+    "date": "2025-10-28T07:56:43.105009",
+    "target_state": "Alaska",
+    "branches_scraped": [
+      "Coast Guard",
+      "Air Force",
+      "Navy",
+      "Marines"
+    ],
+    "total_pages": 6,
+    "successful_scrapes": 0,
+    "failed_scrapes": 6
+  },
+  "competitors": [
+    {
+      "branch": "Coast Guard",
+      "alaska_pages": [],
+      "recruiter_contacts": []
+    },
+    {
+      "branch": "Air Force",
+      "alaska_pages": [],
+      "recruiter_contacts": []
+    },
+    {
+      "branch": "Navy",
+      "alaska_pages": [],
+      "recruiter_contacts": []
+    },
+    {
+      "branch": "Marines",
+      "alaska_pages": [],
+      "recruiter_contacts": []
+    }
+  ]
+}
