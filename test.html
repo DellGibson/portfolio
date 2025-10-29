@@ -139,11 +139,15 @@
                             link.rel = 'stylesheet';
                             link.href = 'style.css';
                             link.onload = () => {
-                                document.head.removeChild(link);
+                                if (link.parentNode) {
+                                    document.head.removeChild(link);
+                                }
                                 resolve(true);
                             };
                             link.onerror = () => {
-                                document.head.removeChild(link);
+                                if (link.parentNode) {
+                                    document.head.removeChild(link);
+                                }
                                 resolve(false);
                             };
                             document.head.appendChild(link);
@@ -157,9 +161,15 @@
                             const script = document.createElement('script');
                             script.src = 'script.js';
                             script.onload = () => {
+                                if (script.parentNode) {
+                                    document.head.removeChild(script);
+                                }
                                 resolve(true);
                             };
                             script.onerror = () => {
+                                if (script.parentNode) {
+                                    document.head.removeChild(script);
+                                }
                                 resolve(false);
                             };
                             document.head.appendChild(script);
