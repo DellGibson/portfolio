@@ -80,12 +80,19 @@ class BotWorker(QThread):
                     account = self.api.get_account()
                     positions = self.api.list_positions()
 
+                    # Get order history (last 100 orders)
+                    try:
+                        orders = self.api.list_orders(status='closed', limit=100)
+                    except:
+                        orders = []
+
                     stats = {
                         'balance': float(account.equity),
                         'buying_power': float(account.buying_power),
                         'daily_pnl': self.order_manager.daily_pnl,
                         'positions_count': len(positions),
                         'positions': positions,
+                        'orders': orders,
                         'timestamp': datetime.now()
                     }
 
@@ -286,6 +293,131 @@ class LogWidget(QWidget):
         scrollbar.setValue(scrollbar.maximum())
 
 
+class OrderHistoryWidget(QWidget):
+    """Widget showing trade history"""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.api = None  # Will be set by parent
+        self.init_ui()
+
+    def init_ui(self):
+        layout = QVBoxLayout()
+
+        # Summary stats group
+        stats_group = QGroupBox("Trading Summary")
+        stats_layout = QGridLayout()
+
+        self.total_trades_label = QLabel("0")
+        stats_layout.addWidget(QLabel("Total Trades:"), 0, 0)
+        stats_layout.addWidget(self.total_trades_label, 0, 1)
+
+        self.win_rate_label = QLabel("0%")
+        stats_layout.addWidget(QLabel("Win Rate:"), 0, 2)
+        stats_layout.addWidget(self.win_rate_label, 0, 3)
+
+        self.total_pnl_label = QLabel("$0.00")
+        stats_layout.addWidget(QLabel("Total P&L:"), 1, 0)
+        stats_layout.addWidget(self.total_pnl_label, 1, 1)
+
+        self.avg_pnl_label = QLabel("$0.00")
+        stats_layout.addWidget(QLabel("Avg P&L per Trade:"), 1, 2)
+        stats_layout.addWidget(self.avg_pnl_label, 1, 3)
+
+        stats_group.setLayout(stats_layout)
+        layout.addWidget(stats_group)
+
+        # History table
+        self.table = QTableWidget()
+        self.table.setColumnCount(9)
+        self.table.setHorizontalHeaderLabels([
+            'Date', 'Symbol', 'Side', 'Quantity', 'Entry Price',
+            'Exit Price', 'P&L $', 'P&L %', 'Duration'
+        ])
+        self.table.setAlternatingRowColors(True)
+        self.table.setSortingEnabled(True)
+
+        layout.addWidget(self.table)
+
+        # Refresh button
+        refresh_btn = QPushButton("🔄 Refresh History")
+        refresh_btn.clicked.connect(self.refresh_history)
+        layout.addWidget(refresh_btn)
+
+        self.setLayout(layout)
+
+    def refresh_history(self):
+        """Refresh order history from API"""
+        if self.api:
+            try:
+                orders = self.api.list_orders(status='closed', limit=100)
+                self.update_history(orders)
+            except Exception as e:
+                print(f"Error refreshing history: {e}")
+
+    def update_history(self, orders):
+        """Update history table with closed orders"""
+        # Filter for filled orders only
+        closed_orders = [o for o in orders if o.status == 'filled']
+
+        self.table.setRowCount(len(closed_orders))
+
+        wins = 0
+        total_pnl = 0.0
+
+        for i, order in enumerate(closed_orders):
+            # Parse order data
+            filled_at = order.filled_at if hasattr(order, 'filled_at') else 'N/A'
+            symbol = order.symbol
+            side = order.side
+            qty = order.qty
+            filled_price = float(order.filled_avg_price) if order.filled_avg_price else 0.0
+
+            # Calculate P&L (simplified - in real implementation would need entry/exit pairs)
+            pnl = 0.0  # Placeholder
+            pnl_pct = 0.0  # Placeholder
+            duration = "N/A"  # Placeholder
+
+            # Populate table
+            self.table.setItem(i, 0, QTableWidgetItem(str(filled_at)))
+            self.table.setItem(i, 1, QTableWidgetItem(symbol))
+            self.table.setItem(i, 2, QTableWidgetItem(side.upper()))
+            self.table.setItem(i, 3, QTableWidgetItem(str(qty)))
+            self.table.setItem(i, 4, QTableWidgetItem(f"${filled_price:.2f}"))
+            self.table.setItem(i, 5, QTableWidgetItem("N/A"))  # Exit price
+
+            pnl_item = QTableWidgetItem(f"${pnl:.2f}")
+            pnl_pct_item = QTableWidgetItem(f"{pnl_pct:+.2f}%")
+
+            # Color based on profit/loss
+            color = QColor(0, 150, 0) if pnl >= 0 else QColor(200, 0, 0)
+            pnl_item.setForeground(color)
+            pnl_pct_item.setForeground(color)
+
+            self.table.setItem(i, 6, pnl_item)
+            self.table.setItem(i, 7, pnl_pct_item)
+            self.table.setItem(i, 8, QTableWidgetItem(duration))
+
+            if pnl > 0:
+                wins += 1
+            total_pnl += pnl
+
+        # Update summary stats
+        self.total_trades_label.setText(str(len(closed_orders)))
+
+        if len(closed_orders) > 0:
+            win_rate = (wins / len(closed_orders)) * 100
+            self.win_rate_label.setText(f"{win_rate:.1f}%")
+            self.win_rate_label.setStyleSheet(f"color: {'green' if win_rate >= 50 else 'red'};")
+
+            avg_pnl = total_pnl / len(closed_orders)
+            self.avg_pnl_label.setText(f"${avg_pnl:.2f}")
+            self.avg_pnl_label.setStyleSheet(f"color: {'green' if avg_pnl > 0 else 'red'};")
+
+        self.total_pnl_label.setText(f"${total_pnl:.2f}")
+        self.total_pnl_label.setStyleSheet(f"color: {'green' if total_pnl >= 0 else 'red'};")
+
+
 class MainWindow(QMainWindow):
     """Main application window"""
 
@@ -342,6 +474,10 @@ class MainWindow(QMainWindow):
         # Positions tab
         self.positions = PositionsWidget()
         tabs.addTab(self.positions, "📈 Positions")
+
+        # Order history tab
+        self.order_history = OrderHistoryWidget()
+        tabs.addTab(self.order_history, "📜 History")
 
         # Logs tab
         self.logs = LogWidget()
@@ -457,6 +593,9 @@ class MainWindow(QMainWindow):
         self.bot_worker.error_occurred.connect(self.on_error)
         self.bot_worker.start()
 
+        # Give API reference to order history widget
+        self.order_history.api = self.bot_worker.api
+
         # Update UI
         self.start_btn.setEnabled(False)
         self.stop_btn.setEnabled(True)
@@ -525,6 +664,11 @@ class MainWindow(QMainWindow):
         # Update positions
         positions = stats.get('positions', [])
         self.positions.update_positions(positions)
+
+        # Update order history
+        orders = stats.get('orders', [])
+        if orders:
+            self.order_history.update_history(orders)
 
     def on_error(self, error_msg: str):
         """Handle error from bot worker"""

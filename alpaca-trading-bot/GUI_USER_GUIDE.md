@@ -98,7 +98,7 @@ Before starting the bot, make sure:
 │  │  └───────────────────────────────────────────────────┘   │  │
 │  └───────────────────────────────────────────────────────────┘  │
 │                                                                 │
-│  [📊 Dashboard] [📈 Positions] [📝 Logs]                       │
+│  [📊 Dashboard] [📈 Positions] [📜 History] [📝 Logs]          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -130,7 +130,33 @@ Table with all open positions:
 - Sortable columns
 - Auto-refresh every 5 seconds
 
-#### 3️⃣ **Logs Tab** (📝)
+#### 3️⃣ **Order History Tab** (📜)
+
+**What it shows:**
+
+**Trading Summary:**
+- Total Trades - Count of all closed trades
+- Win Rate - Percentage of profitable trades (green if ≥50%, red if <50%)
+- Total P&L - Cumulative profit/loss from all trades
+- Avg P&L per Trade - Average profit/loss per trade
+
+**Order History Table:**
+
+| Date | Symbol | Side | Quantity | Entry Price | Exit Price | P&L $ | P&L % | Duration |
+|------|--------|------|----------|-------------|------------|-------|-------|----------|
+| 10:30:15 | AAPL | BUY | 50 | $178.50 | $180.20 | +$85 | +0.95% | 2h 15m |
+| 11:45:22 | SPY | SELL | 15 | $581.50 | $580.00 | -$22 | -0.26% | 1h 30m |
+
+**Features:**
+- Shows last 100 closed orders
+- Sortable columns (click header to sort)
+- Color-coded P&L (green = profit, red = loss)
+- Refresh button to manually update
+- Auto-updates every 5 seconds when bot running
+
+**Updates:** Every 5 seconds + manual refresh
+
+#### 4️⃣ **Logs Tab** (📝)
 
 **What it shows:**
 - Real-time log messages
@@ -236,7 +262,8 @@ Table with all open positions:
 |----------|--------|
 | `Alt+1` | Switch to Dashboard Tab |
 | `Alt+2` | Switch to Positions Tab |
-| `Alt+3` | Switch to Logs Tab |
+| `Alt+3` | Switch to History Tab |
+| `Alt+4` | Switch to Logs Tab |
 
 ### Quick Actions
 
@@ -515,6 +542,7 @@ ERROR: Failed to connect to Alpaca API
 - ✅ Dashboard with metrics
 - ✅ Real-time charts
 - ✅ Positions table
+- ✅ Order history tab
 - ✅ Log viewer
 - ✅ System tray integration
 - ✅ Desktop notifications
@@ -523,7 +551,6 @@ ERROR: Failed to connect to Alpaca API
 - ✅ Emergency stop
 
 ### Planned Features (v1.1.0)
-- Order history tab
 - Strategy comparison charts
 - Dark theme
 - Sound alerts
@@ -531,6 +558,7 @@ ERROR: Failed to connect to Alpaca API
 - Performance analytics
 - Backtesting integration
 - Mobile companion app
+- Export to CSV/PDF
 
 ---
 
