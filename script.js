@@ -2,6 +2,11 @@
 // Modern Portfolio - Interactive Features
 // ========================================
 
+// Animation configuration constants
+const PARALLAX_RATE = 0.5;
+const CARD_ANIMATION_DELAY = 100; // milliseconds
+const CARD_STAGGER_DELAY = 0.1; // seconds
+
 // Smooth scrolling for navigation links with offset for sticky nav
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -52,7 +57,7 @@ const cardObserver = new IntersectionObserver((entries) => {
             setTimeout(() => {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
+            }, index * CARD_ANIMATION_DELAY);
         }
     });
 }, observerOptions);
@@ -60,7 +65,7 @@ const cardObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.project-card').forEach((card, index) => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(30px)';
-    card.style.transition = `opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+    card.style.transition = `opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * CARD_STAGGER_DELAY}s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * CARD_STAGGER_DELAY}s`;
     cardObserver.observe(card);
 });
 
@@ -95,7 +100,7 @@ const hero = document.querySelector('#hero');
 if (hero) {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        const rate = scrolled * 0.5;
+        const rate = scrolled * PARALLAX_RATE;
         hero.style.transform = `translateY(${rate}px)`;
     });
 }
