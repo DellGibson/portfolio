@@ -6,7 +6,6 @@ These tests validate the code structure without requiring API keys or external s
 import ast
 import sys
 import os
-from unittest.mock import Mock, patch, MagicMock
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
