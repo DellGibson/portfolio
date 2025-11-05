@@ -32,10 +32,10 @@ class Config:
 
     @classmethod
     def validate(cls):
-        """Ensure required config is present"""
+        """Ensure required config is present. Call this explicitly in main.py before starting the bot."""
         if not cls.ALPACA_API_KEY or not cls.ALPACA_SECRET_KEY:
             raise ValueError("Missing ALPACA_API_KEY or ALPACA_SECRET_KEY in environment")
         return True
 
-# Validate on import
-Config.validate()
+# Note: Validation is NOT called on import to allow testing with mocks.
+# Call Config.validate() explicitly in main.py before starting the bot.

@@ -265,6 +265,9 @@ class TestMomentumBreakoutStrategy:
         """Test 11: Position size adjusts for volatility"""
         now = datetime.now()
 
+        # Set seed for deterministic test
+        np.random.seed(42)
+
         # Low volatility stock (small price movements)
         for i in range(20):
             price = 100.00 + np.random.uniform(-0.1, 0.1)  # ±0.1% moves
