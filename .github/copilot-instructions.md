@@ -122,7 +122,7 @@ pytest tests/ -v --cov=. --cov-report=term-missing
 - Don't add new dependencies without justification
 - Don't modify test files unless fixing or adding tests
 - Don't remove or edit unrelated tests
-- Don't commit build artifacts or node_modules (if added)
+- Don't commit build artifacts or dependencies
 - Don't commit `.env` files or API credentials
 - Don't make large-scale refactoring changes unless specifically requested
 - Don't modify working code unnecessarily
@@ -130,7 +130,7 @@ pytest tests/ -v --cov=. --cov-report=term-missing
 ## Security Considerations
 
 - Never commit API keys, tokens, or credentials
-- Use `.env.example` as template for environment variables
+- For the alpaca-trading-bot, use `.env.example` as template for environment variables
 - Validate all user inputs
 - Follow secure coding practices for financial data handling
 - Be cautious with external API integrations
