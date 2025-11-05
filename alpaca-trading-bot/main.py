@@ -512,9 +512,20 @@ async def main():
     Entry point for trading bot
 
     Handles:
+    - Config validation
     - Signal handlers for graceful shutdown
     - Bot initialization and execution
     """
+    # Validate configuration before starting
+    try:
+        Config.validate()
+        log_info("Configuration validated successfully")
+    except ValueError as e:
+        log_error(f"Configuration error: {e}")
+        print(f"ERROR: {e}")
+        print("Please check your .env file or environment variables")
+        sys.exit(1)
+
     bot = TradingBot()
 
     # Setup signal handlers for graceful shutdown

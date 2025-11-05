@@ -200,6 +200,11 @@ class MeanReversionStrategy(BaseStrategy):
 
         Logic: Risk 1% of account per trade, adjust for volatility
         """
+        # Defensive check: ensure price is valid
+        if price <= 0:
+            log_warning(f"Invalid price {price} for {symbol} in position sizing")
+            return 0
+
         # Risk 1% of account
         risk_amount = account_equity * 0.01
 
@@ -329,6 +334,11 @@ class MomentumBreakoutStrategy(BaseStrategy):
         Calculate position size using volatility-adjusted method.
         Higher volatility = smaller position to normalize risk.
         """
+        # Defensive check: ensure price is valid
+        if price <= 0:
+            log_warning(f"Invalid price {price} for {symbol} in position sizing")
+            return 0
+
         # Calculate ATR (Average True Range) as volatility proxy
         if symbol not in cache.trades or len(cache.trades[symbol]) < 14:
             # Fallback to simple percentage if insufficient data
