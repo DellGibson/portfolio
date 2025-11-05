@@ -6,6 +6,7 @@ These tests validate the code structure without requiring API keys or external s
 import ast
 import sys
 import os
+from unittest.mock import Mock, patch, MagicMock
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -123,3 +124,66 @@ def test_trader_ai_executable():
     
     assert first_line.startswith('#!'), "trader_ai.py should have a shebang line"
     assert 'python' in first_line.lower(), "Shebang should reference python"
+
+
+def test_get_live_price_handles_single_symbol_correctly():
+    """Test that get_live_price accesses trade.price directly for single symbol requests."""
+    trader_ai_path = os.path.join(os.path.dirname(__file__), '..', 'trader_ai.py')
+    with open(trader_ai_path, 'r') as f:
+        content = f.read()
+    
+    # Parse the code to find the get_live_price function
+    tree = ast.parse(content)
+    
+    # Find the get_live_price function
+    get_live_price_func = None
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef) and node.name == 'get_live_price':
+            get_live_price_func = node
+            break
+    
+    assert get_live_price_func is not None, "get_live_price function not found"
+    
+    # Convert the function back to source code for inspection
+    func_source = ast.unparse(get_live_price_func)
+    
+    # Verify that the function uses trade.price (correct) instead of trade[symbol].price (incorrect)
+    assert 'trade.price' in func_source, \
+        "get_live_price should access trade.price directly for single symbol"
+    
+    # Verify that the old dictionary-style access is NOT present
+    assert 'trade[symbol]' not in func_source and 'trade[' not in func_source, \
+        "get_live_price should not use dictionary-style access (trade[symbol])"
+    
+    # Verify that the old check "symbol not in trade" is NOT present
+    assert 'not in trade' not in func_source, \
+        "get_live_price should not check 'symbol not in trade' for single symbol requests"
+
+
+def test_get_live_price_has_correct_comment():
+    """Test that get_live_price has a comment explaining the LatestTrade object handling."""
+    trader_ai_path = os.path.join(os.path.dirname(__file__), '..', 'trader_ai.py')
+    with open(trader_ai_path, 'r') as f:
+        lines = f.readlines()
+    
+    # Find the get_live_price function
+    func_start = None
+    func_end = None
+    for i, line in enumerate(lines):
+        if 'def get_live_price' in line:
+            func_start = i
+        if func_start is not None and line.strip().startswith('def ') and i > func_start:
+            func_end = i
+            break
+    
+    if func_end is None:
+        func_end = len(lines)
+    
+    assert func_start is not None, "get_live_price function not found"
+    
+    # Get the function content
+    func_content = ''.join(lines[func_start:func_end])
+    
+    # Verify that there's a comment about LatestTrade object
+    assert 'LatestTrade' in func_content or 'latest trade' in func_content.lower(), \
+        "get_live_price should have a comment explaining LatestTrade object handling"

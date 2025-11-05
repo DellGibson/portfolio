@@ -245,11 +245,9 @@ def get_live_price(symbol=SYMBOL):
         request = StockLatestTradeRequest(symbol_or_symbols=symbol)
         trade = data.get_stock_latest_trade(request)
         
-        if symbol not in trade:
-             logger.warning(f"No trade data found for {symbol}")
-             return 0.0
-
-        price = float(trade[symbol].price)
+        # When requesting a single symbol, Alpaca SDK returns a LatestTrade object directly
+        # Access the price attribute directly from the LatestTrade object
+        price = float(trade.price)
         logger.info(f"Live {symbol} price: ${price}")
         bot_status["live_price"] = price # Update status
         return price
