@@ -94,7 +94,7 @@ pytest tests/ -v --cov=. --cov-report=term-missing
 ## File Structure
 
 ```
-portfolio/
+.
 ├── .github/                 # GitHub configuration (this file)
 ├── alpaca-trading-bot/     # Python trading bot
 │   ├── tests/              # Pytest test files
@@ -106,7 +106,6 @@ portfolio/
 ├── test.html               # Test suite
 ├── README.md               # Project documentation
 └── TESTING.md              # Testing documentation
-
 ```
 
 ## Do's and Don'ts
