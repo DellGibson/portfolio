@@ -46,6 +46,21 @@ cd alpaca-trading-bot
 pytest tests/ -v --cov=. --cov-report=term-missing
 ```
 
+**Environment Setup:**
+```bash
+# Copy .env.example to .env and configure your API keys
+cd alpaca-trading-bot
+cp .env.example .env
+# Edit .env with your Alpaca API credentials (never commit this file)
+```
+
+**Linting:**
+```bash
+# Frontend: No linters currently configured for HTML/CSS/JavaScript
+# Python: Follow PEP 8 standards, no automated linter configured yet
+# Validate Python code style manually or with your IDE
+```
+
 ## Coding Standards
 
 ### General Guidelines
@@ -156,3 +171,45 @@ pytest tests/ -v --cov=. --cov-report=term-missing
 - Update TESTING.md if changing test procedures
 - Add inline comments for complex logic
 - Keep documentation concise and accurate
+
+## Common Workflows
+
+### Making Changes to Portfolio Website
+```bash
+# 1. Make changes to HTML/CSS/JavaScript
+# 2. Test locally by opening test.html in browser
+# 3. Verify responsiveness on different screen sizes
+# 4. Commit changes with descriptive message
+```
+
+### Adding New Trading Strategy
+```bash
+# 1. Navigate to alpaca-trading-bot directory
+cd alpaca-trading-bot
+
+# 2. Create strategy in strategy.py following existing patterns
+# 3. Add corresponding tests in tests/test_strategy.py
+# 4. Run tests to ensure coverage
+pytest tests/test_strategy.py -v --cov=strategy
+
+# 5. Test integration with main.py
+# 6. Document strategy parameters and behavior
+```
+
+### Running Full Test Suite
+```bash
+# Frontend tests (open in browser)
+# Navigate to: http://localhost:8000/test.html
+
+# Backend tests
+cd alpaca-trading-bot
+pytest tests/ -v --cov=. --cov-report=term-missing
+```
+
+## Git Best Practices
+
+- Use descriptive commit messages
+- Keep commits focused and atomic
+- Never commit .env files or API credentials
+- Review .gitignore before committing
+- Test changes before pushing
