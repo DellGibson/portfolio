@@ -3,56 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DellGibson - Full-stack developer specializing in web development, automation, and AI integration">
+    <meta name="theme-color" content="#667eea">
     <title>DellGibson | Developer & Creative</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
+    <nav role="navigation" aria-label="Main navigation">
         <h1>DellGibson</h1>
         <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about" aria-label="About section">About</a></li>
+            <li><a href="#projects" aria-label="Projects section">Projects</a></li>
+            <li><a href="#contact" aria-label="Contact section">Contact</a></li>
         </ul>
     </nav>
 
-    <section id="hero">
+    <section id="hero" role="banner">
         <h2>Developer & Creative Professional</h2>
         <p>Building digital experiences with code and creativity</p>
     </section>
 
-    <section id="about">
-        <h2>About Me</h2>
+    <section id="about" aria-labelledby="about-heading">
+        <h2 id="about-heading">About Me</h2>
         <p>Full-stack developer with a passion for clean code and creative solutions. Experienced in web development, automation, and AI integration.</p>
     </section>
 
-    <section id="projects">
-        <h2>Projects</h2>
+    <section id="projects" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
         <div class="project-grid">
-            <div class="project-card">
+            <article class="project-card">
                 <h3>Web Scraper</h3>
                 <p>Python-based data extraction tool</p>
-                <a href="#">View on GitHub</a>
-            </div>
-            <div class="project-card">
+                <a href="#" aria-label="View Web Scraper on GitHub"><span>View on GitHub</span></a>
+            </article>
+            <article class="project-card">
                 <h3>Portfolio Site</h3>
                 <p>Responsive personal website</p>
-                <a href="#">View Live</a>
-            </div>
-            <div class="project-card">
+                <a href="#" aria-label="View Portfolio Site live"><span>View Live</span></a>
+            </article>
+            <article class="project-card">
                 <h3>Coming Soon</h3>
                 <p>More projects on the way...</p>
-            </div>
+            </article>
         </div>
     </section>
 
-    <section id="contact">
-        <h2>Get In Touch</h2>
-        <p>Email: george.kendall2@gmail.com</p>
+    <section id="contact" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Get In Touch</h2>
+        <p>Email: <a href="mailto:george.kendall2@gmail.com" class="email-link">george.kendall2@gmail.com</a></p>
         <div class="social-links">
-            <a href="https://github.com/DellGibson" target="_blank">GitHub</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Twitter</a>
+            <a href="https://github.com/DellGibson" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile"><span>GitHub</span></a>
+            <a href="#" aria-label="Visit my LinkedIn profile"><span>LinkedIn</span></a>
+            <a href="#" aria-label="Visit my Twitter profile"><span>Twitter</span></a>
         </div>
     </section>
 
