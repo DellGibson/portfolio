@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "old_date": "2025-10-01T10:00:00",
+    "new_date": "2025-11-01T10:00:00",
+    "comparison_date": "2025-11-08T04:23:54.699018"
+  },
+  "bonus_changes": [
+    {
+      "branch": "Coast Guard",
+      "old_amount": 15000,
+      "new_amount": 20000,
+      "delta": 5000,
+      "delta_percent": 33.3,
+      "context": "Aviation Maintenance Technicians receive $20,000 bonus for Kodiak assignments",
+      "alert_level": "HIGH",
+      "direction": "INCREASE"
+    }
+  ],
+  "messaging_shifts": [],
+  "new_content": [],
+  "duty_station_changes": [],
+  "alert_level": "HIGH",
+  "summary": "\ud83d\udea8 1 HIGH PRIORITY bonus change(s) detected | 1 bonus change(s) (1 increases)"
+}
